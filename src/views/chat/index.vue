@@ -14,6 +14,7 @@ import { HoverButton, SvgIcon } from '@/components/common'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { useChatStore, usePromptStore } from '@/store'
 import { fetchChatAPIProcess } from '@/api'
+import Donate from '@/components/common/donate/index.vue'
 import { t } from '@/locales'
 
 let controller = new AbortController()
@@ -39,6 +40,7 @@ const conversationList = computed(() => dataSources.value.filter(item => (!item.
 const prompt = ref<string>('')
 const loading = ref<boolean>(false)
 const inputRef = ref<Ref | null>(null)
+const showDonate = ref<boolean>(false)
 
 // 添加PromptStore
 const promptStore = usePromptStore()
@@ -407,6 +409,9 @@ function handleStop() {
     loading.value = false
   }
 }
+function handleDonate() {
+  showDonate.value = !showDonate.value
+}
 
 // 可优化部分
 // 搜索选项计算，这里使用value作为索引项，所以当出现重复value时渲染异常(多项同时出现选中效果)
@@ -479,9 +484,16 @@ onUnmounted(() => {
           :class="[isMobile ? 'p-2' : 'p-4']"
         >
           <template v-if="!dataSources.length">
-            <div class="flex items-center justify-center mt-4 text-center text-neutral-300">
+            <div class="flex items-center flex-col justify-center mt-4 text-center ">
               <SvgIcon icon="ri:bubble-chart-fill" class="mr-2 text-3xl" />
-              <span>Aha~</span>
+              <div>永久免费提供学习和测试，支持上下文，支持开启关闭联网模式，支持保存会话，切勿发布至国内平台或微信分享</div>
+              <div />
+              <div>禁止发布、传播任何违法、违规内容，使用本网站，视您接受并同意<a target="_blank" style="color:#006eff;" href="https://docs.qq.com/doc/DVFdaY1lvWHFSWU5w">《免责声明》</a></div>
+              <b style="color:red;">每人每月捐个三元、服务就能永久免费下去！！⬇️⬇️⬇️可定期自愿捐赠投喂，不捐也能随便用</b>
+              <div>服务器昂贵,接口昂贵,但网站免费！！如果你觉得做的好，可以给我买一瓶冰阔落</div>
+              <div>
+                <img src="@/assets/kele.jpg" width="200" height="100" alt="kele">
+              </div>
             </div>
           </template>
           <template v-else>
@@ -513,6 +525,12 @@ onUnmounted(() => {
     <footer :class="footerClass">
       <div class="w-full max-w-screen-xl m-auto">
         <div class="flex items-center justify-between space-x-2">
+          <HoverButton @click="handleDonate">
+            <span class="text-xl" :class="{ 'text-[#2979ff]': !showDonate, 'text-[#a8071a]': showDonate }">
+              <SvgIcon icon="bxs:gift" />
+            </span>
+          </HoverButton>
+          <Donate v-model:visible="showDonate" />
           <HoverButton @click="handleClear">
             <span class="text-xl text-[#4f555e] dark:text-white">
               <SvgIcon icon="ri:delete-bin-line" />
