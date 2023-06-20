@@ -14,7 +14,7 @@ import { HoverButton, SvgIcon } from '@/components/common'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { useChatStore, usePromptStore } from '@/store'
 import { fetchChatAPIProcess } from '@/api'
-import Donate from '@/components/common/donate/index.vue'
+import Donate from '@/components/common/Donate/index.vue'
 import { t } from '@/locales'
 
 let controller = new AbortController()
