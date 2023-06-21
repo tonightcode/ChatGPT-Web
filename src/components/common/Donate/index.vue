@@ -26,7 +26,7 @@ const show = computed({
 
 <template>
   <NModal v-model:show="show" :auto-focus="false">
-    <NCard role="dialog" aria-modal="true" :bordered="false" preset="dialog" title="感谢支持！！" style="width: 95%; max-width: 50%;height: 95%; max-height: 645px" close-on-esc>
+    <NCard role="dialog" aria-modal="true" :bordered="false" preset="dialog" title="感谢支持！" style="width: 95%; max-width: 50%;height: 95%; max-height: 645px" close-on-esc>
       <div class="flex items-center flex-col justify-center mt-4 text-center ">
         <div>永久免费提供学习和测试，支持上下文，支持开启关闭联网模式，支持保存会话，切勿发布至国内平台或微信分享</div>
         <div />
